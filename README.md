@@ -1,8 +1,8 @@
 # LightKeeper
 
-**Current Version: 0.2.5**
+**Current Version: 1.0.0**
 
-LightKeeper is a desktop application for planning and managing work on US Coast Guard Aids to Navigation (ATON). It downloads official Light List data from USCG NAVCEN and provides tools to browse, search, select, and generate multi-day trip workplans.
+LightKeeper is a desktop application for planning and managing work on US Coast Guard Aids to Navigation (ATON). It downloads official Light List data from USCG NAVCEN and provides tools to browse, search, select, and generate multi-day trip workplans with an advanced logic engine for accurate time, distance, and route planning.
 
 Download the latest `LightKeeper.exe` from the [Releases](https://github.com/ArsenalRX/lightkeeper-releases/releases) page — no installation required, just run it.
 
@@ -17,15 +17,22 @@ Download the latest `LightKeeper.exe` from the [Releases](https://github.com/Ars
 - Sync official data directly from USCG NAVCEN
 
 ### Trip Workplan Generator
-- Smart geographic clustering into daily work areas
-- Route optimization (nearest-neighbor ordering)
-- Distance and time estimates per day and per leg
+- Smart geographic clustering with sequential waterway partitioning
+- Route optimization with 2-opt, waterway linear ordering, and recovery ramp end-bias
+- Waterway tortuosity factor (auto-computed from aid GPS — accounts for river bends)
+- Per-aid work time from characteristics, RACON, AIS, optics, range, height, and remarks
+- Full day time budget: launch/recovery prep, ramp transit, approach/departure, contingency buffer
+- Joint ramp optimization: evaluates top 3 launch x top 3 recovery ramps (9 combinations)
+- Barrier-aware ramp scoring (dams, locks, weirs detected via OpenStreetMap)
+- Tight cluster detection (aids <0.5mi apart never split across days)
+- OSRM real road distances throughout the optimization pipeline
+- Detailed per-day time breakdown (collapsible): drive, prep, ramp transit, work+transit, buffer
 - Departure and arrival city routing
 - Trip phases: Trailering + Water or Water Only
 - Save workplan as HTML
 
 ### Lodging Intelligence
-- Hotel recommendations with 10-step auto-optimization
+- Hotel recommendations with multi-night preference scoring
 - Lodging subtype classification: Hotel, Motel, Resort, Airport Hotel, Campground
 - Airport hotel detection and filtering
 - Hotel-to-ramp transit and multi-night lodging chain optimization
@@ -35,6 +42,7 @@ Download the latest `LightKeeper.exe` from the [Releases](https://github.com/Ars
 - Fee awareness
 - Smart naming from nearby parks, campgrounds, and recreation areas
 - Quality scoring (verified/likely/unverified)
+- Waterway name matching bonus for same-waterway ramps
 
 ### Vessel Configuration
 - Multi-vessel support with full spec sheets
@@ -49,7 +57,7 @@ Download the latest `LightKeeper.exe` from the [Releases](https://github.com/Ars
 - Military format output (e.g. `2219Z`)
 - Automatic DST detection for any date using IANA timezones
 
-### 38 Accuracy Checks
+### Accuracy Checks
 - Route distance and time validation
 - Severe weather and daylight warnings
 - Fuel capacity and range checks
@@ -71,16 +79,27 @@ Download the latest `LightKeeper.exe` from the [Releases](https://github.com/Ars
 
 ---
 
-## What's New in v0.2.5
+## What's New in v1.0.0
 
-### Zulu Time Calculator Improvements
-- **24-hour military time input** — times always display as `HH:MM` (e.g. `22:19`) regardless of browser or OS locale
-- **Total duration display** — shows elapsed time between arrive and depart (handles overnight spans)
-- **Military format output** — Zulu times now show both `HH:MMZ` and no-colon `HHMMZ` format (e.g. `22:19Z (2219Z) Zulu`)
+### Logic Engine Rework
+- **Waterway tortuosity factor** — auto-computed from aid GPS positions along waterways, accounts for river bends in all distance/time calculations
+- **Per-aid work time estimation** — uses aid characteristics (Fl, Iso, Oc, Q), RACON (+10min), AIS (+5min), range >10NM (+5min), height >60ft (+5min), destroyed/missing aids (5min verify only)
+- **Full day time budget** — launch prep (25min), ramp-to-first-aid transit, work+transit, last-aid-to-ramp transit, recovery prep (25min), 45min contingency buffer
+- **Sequential waterway partitioning** — replaces k-means for river trips, splits at natural gaps along the waterway
+- **Joint ramp optimization** — evaluates top 3 launch x top 3 recovery ramps (9 combos), picks lowest total day time
+- **Barrier-aware ramp scoring** — detects dams, locks, weirs via OpenStreetMap Overpass API, penalizes ramps separated from aids by barriers
+- **Tight cluster detection** — aids <0.5mi apart are never split across different days
+- **OSRM before optimization** — real road distances used throughout the entire optimization pipeline
+- **Multi-night hotel preference** — jointly scores hotels for consecutive days with nearby ramps
+- **Detailed time breakdown UI** — collapsible per-day view showing morning drive, launch prep, ramp transit, work+transit, recovery prep, evening drive, shuttle, buffer
+- **Code cleanup** — removed duplicate functions, redundant imports, fixed name collisions
 
 ---
 
 ## Recent Changelog
+
+### v0.2.5
+- Zulu calculator: 24hr military time input, total duration, military format output (HHMMZ)
 
 ### v0.2.4
 - Fixed auto-update system
@@ -115,3 +134,4 @@ Download the latest `LightKeeper.exe` from the [Releases](https://github.com/Ars
 - **ATON**: [USCG Navigation Center Light List](https://www.navcen.uscg.gov/light-list-annual-publication)
 - **Weather**: National Weather Service API
 - **Hotels & Boat Ramps**: OpenStreetMap / Overpass API
+- **Road Distances**: OSRM (Open Source Routing Machine)
