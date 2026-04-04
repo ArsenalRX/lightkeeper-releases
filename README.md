@@ -1,6 +1,6 @@
 # LightKeeper — USCG ATON Workplan Tool
 
-**Version 0.8.9.2** | Proprietary Software — All Rights Reserved
+**Version 0.8.9.4** | Proprietary Software — All Rights Reserved
 
 LightKeeper is a desktop application for planning and managing work on US Coast Guard Aids to Navigation (ATON). It downloads official Light List data from USCG NAVCEN and provides tools to browse, search, select, and generate multi-day trip workplans with an advanced logic engine.
 
@@ -107,7 +107,7 @@ All shortcuts can be customized in Settings > Keybinds.
 - Hotels & boat ramps: OpenStreetMap / Overpass API
 - Road distances: OSRM
 
-## Recent Changes (v0.8.9.2)
+## Recent Changes (v0.8.9.4)
 
 - Mapbox Directions API integration — faster routing with OSRM fallback
 - Mapbox token config in Settings > Charts
