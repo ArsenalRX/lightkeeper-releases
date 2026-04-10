@@ -30,6 +30,7 @@ LightKeeper is a desktop application for planning and managing work on US Coast 
 - Departure and arrival city routing
 - Save workplan as HTML file
 - Manual workplan builder with drag-and-drop day assignment and reordering
+- Distribute button auto-optimizes: geographic clustering + border smoothing + hours balancing
 - Trip templates — save and auto-load settings
 - Equipment load list per trip
 
@@ -48,9 +49,21 @@ LightKeeper is a desktop application for planning and managing work on US Coast 
 ### Workplan Route Map
 - Color-coded aid markers per day
 - Draw custom routes per day on the workplan map
+- Route backbone snapping — follows saved routes along the waterway instead of straight lines across land
+- Auto Route button — one click to connect all aids for a day via saved route
+- Solid lines when snapped to saved route, dashed lines when no route available
 - Click aids or drop waypoints anywhere
 - Draggable waypoints with click-to-delete
 - Distance and true/magnetic course labels per leg
+
+### Tides & Water Levels
+- Right-click map to search nearby water level stations
+- NOAA CO-OPS: tide predictions, coastal water levels, tidal currents
+- USGS NWIS: river stage, streamflow, inland lake levels
+- USBR RISE: Bureau of Reclamation reservoirs (Grand Coulee/Lake Roosevelt, Hungry Horse, Dworshak, and more)
+- Clickable station markers — load detailed data including current levels, 3-day tide predictions, reservoir elevation/inflow/storage
+- Color-coded badges by source (NOAA, USGS, USBR)
+- Direct links to official agency station pages
 
 ### Weather & Boat Ramps
 - Weather forecasts for each area with severe weather alerts (NWS API)
@@ -70,6 +83,7 @@ LightKeeper is a desktop application for planning and managing work on US Coast 
 - Route import/export (JSON)
 - Bug report & feature request submission
 - Auto-update checker
+- Responsive toolbar — wraps to 2 rows on smaller screens
 
 ## Districts Supported
 
@@ -106,18 +120,19 @@ All shortcuts can be customized in Settings > Keybinds.
 - Weather: National Weather Service API
 - Hotels & boat ramps: OpenStreetMap / Overpass API
 - Road distances: OSRM
+- Tides & water levels: [NOAA CO-OPS](https://tidesandcurrents.noaa.gov), [USGS NWIS](https://waterservices.usgs.gov), [USBR RISE](https://data.usbr.gov)
 
 ## Recent Changes (v0.8.9.4)
 
+- Tides & Water Levels — right-click map to search NOAA, USGS, and USBR stations with clickable markers
+- Route backbone snapping — workplan routes follow saved waterway paths instead of straight lines
+- Auto Route button on workplan Route Map
+- Smarter Distribute — auto-optimizes with border smoothing and hours balancing
+- Select All in View button restored
+- Responsive toolbar for smaller screens
 - Mapbox Directions API integration — faster routing with OSRM fallback
-- Mapbox token config in Settings > Charts
-- Faster ENC chart loading with smaller tile sizes and longer timeout
-- Much faster app restart — auto-kills previous instance, background cleanup
-- Open Data Folder button in Settings > Cache
-- Fixed `_MEI` temp directory warnings and Desktop clutter
-- Fixed route clearing — Clear only removes from map, doesn't delete saved routes
-- Removed destructive Clear All from Load Route modal
-- Browser shows loading page instead of error on reconnect
+- Added third Overpass API fallback server for improved reliability
+- Fixed silent weather/tide/sunrise task failures in workplan generation
 
 ## License
 
