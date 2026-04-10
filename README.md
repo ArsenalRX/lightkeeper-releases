@@ -2,7 +2,7 @@
 
 > **[View Full Changelog](CHANGELOG.md)** | **[Download Latest Release](https://github.com/ArsenalRX/lightkeeper-releases/releases/latest)**
 
-**Version 0.8.9.5** | Initially released October 24, 2025 | Proprietary Software — All Rights Reserved
+**Version 0.9.0** | Initially released October 24, 2025 | Proprietary Software — All Rights Reserved
 
 LightKeeper is a desktop application for planning and managing work on US Coast Guard Aids to Navigation (ATON). It downloads official Light List data from USCG NAVCEN and provides tools to browse, search, select, and generate multi-day trip workplans with an advanced logic engine.
 
@@ -124,18 +124,20 @@ All shortcuts can be customized in Settings > Keybinds.
 - Road distances: OSRM
 - Tides & water levels: [NOAA CO-OPS](https://tidesandcurrents.noaa.gov), [USGS NWIS](https://waterservices.usgs.gov), [USBR RISE](https://data.usbr.gov)
 
-## Recent Changes (v0.8.9.5)
+## Recent Changes (v0.9.0)
 
 See [CHANGELOG.md](CHANGELOG.md) for full version history since October 2025.
 
-- Tides & Water Levels — right-click map to search NOAA, USGS, and USBR water stations; click markers to load data
-- Clickable station markers — load tide predictions, reservoir elevation, gage readings on click
-- Route backbone snapping — workplan routes follow saved waterway paths instead of straight lines
-- Auto Route button — one-click to connect all aids for a day via saved route
-- Select All moved to Aids Browser — in each tab header, auto-opens workplan panel
-- Smarter Distribute — auto-optimizes with border smoothing and hours balancing (removed Optimize button)
-- Responsive toolbar — wraps to 2 rows on smaller screens with auto-adjusting layout
-- USBR RISE integration — Lake Roosevelt/Grand Coulee, Hungry Horse, Dworshak reservoir data
+- **Water-aware routing** — routes automatically follow waterways around land using A* pathfinding on OSM water polygons
+- **Water station layer toggles** — show/hide Tides, Currents, USGS Gages, and Dams independently
+- **Unit preferences** — switch temperature, wind speed, elevation, and distance units in Settings
+- **USACE CWMS dam data** — real-time reservoir elevation, inflow, outflow, and storage from all 24 USACE offices
+- **USGS stream gages** — viewport-based lazy loading with discharge, gage height, and water temperature
+- **Two-row centered toolbar** — cleaner layout with section labels and consistent sizing
+- **Faster trip generation** — Phase 2 skip when sufficient hotels found, timeouts on corridor search and OSRM
+- Fixed NOAA tide stations invisible under current station markers
+- Fixed USGS gage temperature displaying in Celsius regardless of unit preference
+- Fixed trip generation hanging at "Refining hotel search"
 
 ## License
 
