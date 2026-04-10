@@ -1,6 +1,8 @@
 # LightKeeper Changelog
 
-All notable changes to LightKeeper are documented here, organized by version.
+All notable changes to LightKeeper are documented here.
+
+**Initial Release:** October 24, 2025
 
 ---
 
@@ -8,23 +10,20 @@ All notable changes to LightKeeper are documented here, organized by version.
 
 ### New Features
 - **Tides & Water Levels** — right-click map to search nearby water stations from NOAA CO-OPS (tides, currents), USGS NWIS (river/stream gages), and USBR RISE (reservoirs like Lake Roosevelt/Grand Coulee)
-- **Clickable station markers** — left-click any water station marker to load detailed data (tide predictions, reservoir elevation, gage readings)
+- **Clickable station markers** — left-click any water station marker to load detailed tide predictions, reservoir elevation/inflow/storage, or gage readings
 - **Route backbone snapping** — workplan Route Map follows saved routes along waterways instead of drawing straight lines across land
 - **Auto Route button** — one-click to connect all aids for a day, snapping to saved routes if available
-- **Select All moved to Aids Browser** — "Select All" button now in each tab's header; auto-opens workplan panel after selection
+- **Select All in Aids Browser** — moved to each tab's "N aids in view" header for better workflow; auto-opens workplan panel after selection
 
 ### Improvements
-- **Smarter Distribute** — auto-optimizes after distributing: border smoothing between adjacent days, hours balancing, route reordering (removed separate Optimize button)
-- **Responsive toolbar** — wraps to 2 rows on smaller screens (e.g. 1920x1200) with dynamic map/panel adjustment via ResizeObserver
+- **Smarter Distribute** — auto-optimizes after distributing: border smoothing between adjacent days, hours balancing, route reordering within each day
+- **Responsive toolbar** — wraps to 2 rows on smaller/laptop screens (e.g. 1920x1200) with dynamic map and panel adjustment via ResizeObserver
 - Dashed route lines when no saved route available (visual cue for unverified paths)
 - Route status bar shows "(on saved route)" or "(straight line)"
-
-### Fixes
-- Fixed version display mismatch across UI
+- Panel drag constrained to stay below toolbar
 
 ### Removals
 - Removed Optimize button from Manual Builder (functionality merged into Distribute)
-- Removed Select All from workplan panel (moved to Aids Browser)
 
 ---
 
@@ -39,26 +38,18 @@ All notable changes to LightKeeper are documented here, organized by version.
 ## v0.8.9.3 (April 2026)
 
 ### New Features
-- **District picker** — jump to any USCG district from toolbar dropdown
-- **Extended aid data** — expanded ATON data fields for detailed aid info
-- **CDN tile loading** — direct CDN tiles when online for faster map rendering
+- **District picker** — jump to any USCG district from toolbar dropdown, priority loads selected district
+- **Extended aid data** — structure description, focal plane, sound signal, color, state, CG sector, international LL#, daymark shape
+- **CDN tile loading** — direct CDN tiles when online for faster map rendering with background proxy caching for offline
+- **NOAA Coast Pilot** — toolbar button, per-district PDF volumes, offline caching
+- **Improved aid popups** — color-coded type badge and richer detail display
+- **Unified right-click context menu** on all aid markers with grouped actions
 
 ### Improvements
-- Improved map tile loading performance
-- Better district-level navigation
-
----
-
-## v0.8.9.3 (April 2026)
-
-### New Features
-- **District picker** — jump to any USCG district from toolbar dropdown
-- **Extended aid data** — expanded ATON data fields for detailed aid info
-- **CDN tile loading** — direct CDN tiles when online for faster map rendering
-
-### Improvements
-- Improved map tile loading performance
-- Better district-level navigation
+- Auto-backup on exit with silent restore on launch
+- Map position remembered across sessions
+- Status bar shows active district and aid count
+- Keyboard shortcuts overlay includes Route (R)
 
 ---
 
@@ -70,7 +61,7 @@ All notable changes to LightKeeper are documented here, organized by version.
 
 ### Improvements
 - More accurate road distance calculations throughout optimization pipeline
-- Fallback to OSRM when Mapbox unavailable
+- Automatic fallback to OSRM when Mapbox unavailable
 
 ---
 
@@ -78,7 +69,7 @@ All notable changes to LightKeeper are documented here, organized by version.
 
 ### Changes
 - Switched to 4th-number patch versioning scheme (0.8.9.X)
-- Minor stability improvements
+- Point update checker to public lightkeeper-releases repo
 
 ---
 
@@ -86,17 +77,18 @@ All notable changes to LightKeeper are documented here, organized by version.
 
 ### New Features
 - **Open Data Folder button** in Settings > Cache
-- Faster ENC chart loading with smaller tile sizes and longer timeout
+- **Faster ENC chart loading** — smaller tile sizes and longer timeout
 
 ### Improvements
-- Much faster app restart — auto-kills previous instance, background cleanup
-- Disabled debug mode and reloader in frozen exe
+- Much faster app restart — auto-kills previous instance, background MEI cleanup
+- Disabled debug mode and reloader in frozen exe for stability
 
 ### Fixes
 - Fixed route clearing — Clear only removes from map, doesn't delete saved routes
 - Removed destructive Clear All from Load Route modal
 - Browser shows loading page instead of error on reconnect
 - Fixed sync failures caused by debug mode in frozen exe
+- Updated version history in About section
 
 ---
 
@@ -107,16 +99,16 @@ All notable changes to LightKeeper are documented here, organized by version.
 - Added atexit cleanup for PyInstaller temp directory
 - Auto-dismiss `_MEI` cleanup warning dialog
 - Switched to console mode with hidden window to suppress warnings
+- Removed all lightkeeper-releases references from source code
 
 ---
 
 ## v0.8.7 (March 2026)
 
 ### Changes
-- Updated copyright holder in LICENSE
-- Updated copyright to Evan Isakson in About section
-- Check both repos for updates
-- Removed all lightkeeper-releases references from source, fixed runtime-tmpdir
+- Updated copyright holder to Evan Isakson
+- Check both repos (source + releases) for updates
+- Updated copyright in About section and LICENSE file
 
 ---
 
@@ -130,241 +122,148 @@ All notable changes to LightKeeper are documented here, organized by version.
 
 ---
 
-## v0.8.5 (March 2026)
+## v0.8.5 / v0.8.0 (March 2026)
 
 ### New Features
-- **UX overhaul** — styled modals, improved visual design throughout
-- **Route planner upgrades** — improved waypoint management, context menus
-- **Interactive tutorial** — first-run guided walkthrough
+- **Logic engine overhaul** — tidal/difficulty/barrier intelligence
+- **Manual workplan builder** — drag-and-drop day assignment and reordering
+- **Workplan route map** — draw custom routes per day with distance/bearing labels
+- **Route planner upgrades** — ETA per waypoint, multi-route loading, right-click context menu
+- **Border smoothing** — fix interleaved day assignments between adjacent days
+- **Max hours cap** — rebalance aids between overloaded days
+- **Oscillation detection** — prevent clustering hang in balancing phases
+- **In-app styled modals** — replace all browser alert/confirm dialogs
+- **Template auto-load** on select, start date auto-populate
+- **First-launch tutorial** — interactive guided walkthrough
 
 ### Improvements
-- Modernized modal dialogs
-- Better route planner ergonomics
+- Waterway-aware routing throughout clustering
+- Hotel scoring improvements
+- Modal cleanup and visual polish
 
 ---
 
-## v0.2.5 (February 2026)
-
-### Improvements
-- **Zulu calculator** — 24hr military time input, duration display, improved format
-
----
-
-## v0.2.4 (February 2026)
-
-### Fixes
-- Fixed update batch script — writes to correct app directory, self-deletes properly
-
----
-
-## v0.2.3 (February 2026)
+## v0.7.0 (March 2026)
 
 ### New Features
-- **Lodging classification** — hotels, motels, resorts, airport hotels, campgrounds
-- **Airport hotel filtering** — exclude or include airport hotels
-- **Zulu Time Calculator** — military time conversion tool
+- **Offline map tile caching** — CDN-direct loading when online, proxy cache when offline
+- **Weather forecast caching** with stale fallback
+- **OSRM route caching** for offline distance calculations
+- **Cache management** in Settings panel
+- **District download** for full offline support
+- **Auto-precache** on launch for seamless panning
+- Queue-based background tile downloader
+
+---
+
+## v0.5.0 (February–March 2026)
+
+### New Features
+- **Trip workplan generator** — smart geographic clustering with sequential waterway partitioning
+- **Route optimization** — 2-opt with waterway linear ordering and recovery ramp end-bias
+- **Waterway tortuosity factor** — auto-computed from aid GPS positions (accounts for river bends)
+- **Per-aid work time estimation** — based on characteristics, RACON, AIS, optics, range, height, and remarks
+- **Full day time budget** — launch/recovery prep, ramp transit, approach/departure, work, contingency buffer
+- **Joint ramp optimization** — evaluates top 3 launch x top 3 recovery ramps (9 combinations)
+- **Barrier-aware ramp scoring** — dams, locks, weirs detected via OpenStreetMap
+- **Tight cluster detection** — aids <0.5mi apart never split across days
+- **Hotel recommendations** — multi-night preference scoring, lodging subtype classification (hotels, motels, resorts, airport hotels, campgrounds)
+- **Boat ramp finder** — surface quality, fee info, smart POI-based naming
+- **Weather forecasts** — NWS API with severe weather alerts
+- **Departure and arrival city** routing
+- **Trip templates** — save and auto-load settings
+- **Equipment load list** per trip
+- **Zulu Time Calculator** — 24hr military time, duration display
 
 ### Improvements
+- OSRM real road distances throughout optimization pipeline
+- Trip phases (Trailering + Water or Water Only)
+- Vessel config integration (fuel, draft, bridge clearance checks)
+- Batch trip context API for faster hotel/ramp/weather lookups
+- Cancel button for workplan generation
+- Dark theme workplan redesign with interactive features
+
+---
+
+## v0.2.x (January–February 2026)
+
+### v0.2.5
+- Zulu calculator — 24hr input, duration display, military format
+
+### v0.2.4
+- Fixed update batch script — writes to correct app directory, self-deletes
+
+### v0.2.3
+- Lodging classification — hotels, motels, resorts, airport hotels, campgrounds
+- Airport hotel filtering
 - 38 accuracy checks across workplan generation
-- Better lodging subtype detection
 
-### Fixes
-- Fixed auto-update system
-- Renamed Zulu button for clarity
+### v0.2.2
+- Dark theme workplan redesign with interactive features
+- Cancel button for workplan generation
+- Batch trip context API — faster lookups
+- Simplified workplan header
 
----
-
-## v0.2.2 (February 2026)
-
-### New Features
-- **Dark theme workplan** — redesigned workplan output with interactive features
-- **Cancel button** — cancel workplan generation mid-process
-- **Batch trip context API** — faster hotel/ramp/weather lookups
-
-### Improvements
-- Simplified workplan header — only departure and arrival city
-- Removed fuel stops stat and lookup error messages
-
----
-
-## v0.2.1 (February 2026)
-
-### Fixes
+### v0.2.1
 - Fixed auto-update — no more `.bak` files on desktop
-- Fixed PyInstaller temp directory warning dialog
-- Fixed: show no aids when no districts enabled instead of showing all
+- Fixed PyInstaller temp directory warning
+- Fixed: show no aids when no districts enabled
+
+### v0.2.0
+- Arrival city support
+- Update notification with Update Now button
+- Geocode retry with longer timeout
+- Per-day hotel/launch/weather queries with rate limiting
 
 ---
 
-## v0.2.0 (January 2026)
+## v0.1.0 (December 2025–January 2026)
 
 ### New Features
-- **Arrival city** — route planning with departure and arrival cities
-- **Update notification** — shows Update Now button instead of auto-downloading
-- **Geocode retry** — automatic retries on geocode failure with longer timeout
-
-### Improvements
-- Better hotel search reliability
-- Cleaned trip summary header
-- Per-day queries with rate limiting for hotel/launch/weather
-
-### Fixes
-- Fixed geocode lookup with retries, longer timeout, proper User-Agent
-- Fixed workplan hotel/launch/weather per-day queries
-
----
-
-## v0.1.0 (January 2026)
-
-### Fixes
-- Fixed longitude wrapping bug in bbox viewport query
-- Bug fixes and stability improvements
-
----
-
-## v0.0.9 (January 2026)
-
-### Fixes
-- Fixed flyToAid crash
-- Fixed updateSelBadge error
-- Removed error reporting UI
-- Fixed black/grey map tiles — multi-subdomain Google tiles + Esri fallback
-- Fixed frozen loading spinner
-- Fixed white map on zoom — dark background + transparent fallback
-
----
-
-## v0.0.8 (January 2026)
-
-### New Features
-- **Blocking overlay during sync** — prevents interaction during data sync
-- **Auto-sync** when NAVCEN has newer Light List data on launch
-- **Lighthouse icon** for EXE
-
-### Improvements
-- Removed presets (simplified UI)
-- Improved stacked aids warning
-
----
-
-## v0.0.7 (December 2025)
-
-### New Features
+- **Interactive map** — Leaflet with lights, buoys, daybeacons, bridges
+- **Multiple map layers** — Google Satellite, Esri, OpenStreetMap, Topo, NOAA ENC
+- **USCG NAVCEN data sync** — download official Light List GeoJSON for all 9 districts
+- **Search and filter** — by aid name, Light List number, type
+- **Areas of Responsibility (AOR)** — save and manage custom regions
+- **Aid notes system** — per-aid annotations
+- **Waterway name search** — search by lake/river name
 - **Box select** — shift+drag to select aids in an area
-- **Context menu** — right-click aids for quick actions
-- **Trip presets** — save and load trip configurations
-- **CSV export** — export aid data
+- **Right-click context menu** — quick actions on aids and map
 
 ### Improvements
+- Click-to-fly — click aid in sidebar to zoom to it on map
+- District management — enable/disable districts, live toggle
+- Aid deduplication by light list number
+- Responsive UI for different screen sizes
+
+---
+
+## v0.0.x (October–December 2025)
+
+### Initial Development (v0.0.1–v0.0.9)
+- **October 24, 2025** — Initial release
+- ATON data browser with interactive Leaflet map
+- USCG NAVCEN data sync (all 9 districts)
+- Dark theme UI
+- Single-file EXE distribution via PyInstaller
+- Store database in `%APPDATA%/LightKeeper`
+- Auto-sync ATON data on first launch
 - Auto-report errors to GitHub Issues
 - Auto-shutdown server when browser tab closes
-- Button toggle fixes, tighter responsive CSS
+- GitHub update check on launch
+- Lighthouse icon for EXE
+- Multiple map layer support
+- Weather location search
 
-### Fixes
-- Fixed white screen — replaced beforeunload shutdown with heartbeat watchdog
-
----
-
-## v0.0.6 (December 2025)
-
-### New Features
-- **Responsive UI** — adapts to different screen sizes
-- **GitHub update check** on launch
-
-### Improvements
-- NOAA chart layer fixes
-- Single-file EXE distribution
-- Store database in `%APPDATA%/LightKeeper` instead of next to EXE
-- Auto-sync ATON data on first launch
-
-### Fixes
-- Fixed NOAA charts showing white — transparent fallback for missing tiles
-
----
-
-## v0.0.5 (December 2025)
-
-### New Features
-- **Smart trip workplan** — time-aware clustering balances travel + work hours across days
-- **Departure city** — transit distance to Day 1
-- **Boat launches** — custom markers, launches tab
-- **Waterway name search** — search by lake/river name
-- **Start date and depart time** inputs for trip planning
-
-### Improvements
-- Production hardening
-- Update checker
-- NOAA charts fix
-- PyInstaller build support
-- Smart workplan clustering
-
-### Fixes
-- Fixed objectid collision dropping entire sync batches
-- Fixed departure city geocode — API returns array not object
+### Fixes (v0.0.x)
+- Fixed longitude wrapping bug in bbox viewport query
+- Fixed black/grey map tiles — multi-subdomain Google tiles + Esri fallback
+- Fixed frozen loading spinner
+- Fixed white map on zoom
+- Fixed NOAA charts showing white
+- Fixed duplicate aid entries
+- Fixed flyToAid crash
+- Fixed white screen — heartbeat watchdog replaces beforeunload shutdown
+- Fixed objectid collision dropping sync batches
+- Fixed departure city geocode
 - Fixed hotel/launch search — single bulk query
-- Improved boat launch naming — use operator/city/street
-- Fixed search: strip periods for fuzzy matching
-
----
-
-## v0.0.1–v0.0.4 (November–December 2025)
-
-### Initial Development
-- **Interactive map** with Leaflet — lights, buoys, daybeacons, bridges
-- **USCG NAVCEN data sync** — download official Light List GeoJSON
-- **Multiple map layers** — Google Satellite, Esri, OpenStreetMap, Topo, NOAA ENC
-- **Search and filter** — by aid name, LL#, type
-- **Trip workplan generator** — hotel, weather, and PDF export
-- **Weather location search**
-- **Dark theme UI** — cleaner design, compact panels
-- **Click-to-fly** — click aid in sidebar to fly to it on map
-- **District management** — enable/disable districts, live toggle
-- **Aid deduplication** — fix duplicate entries by light list number
-
----
-
-## v1.1.1 (Pre-release / Development Branch)
-
-### New Features
-- Waterway-aware routing
-- Tile caching system
-- Drag-drop day editing in workplan
-- Calibration tools
-
-### Removals
-- Removed first-run setup wizard
-
----
-
-## v1.1.0 (Pre-release / Development Branch)
-
-### New Features
-- Engine presets
-- Logic priorities system
-- Clustering overhaul
-- Trip templates, map visualization, trip report, equipment presets
-
-### Fixes
-- Fixed JS syntax error in workplan map legend
-
----
-
-## v1.0.0 (Pre-release / Development Branch)
-
-### Major Rework
-- Complete logic engine rework for accurate workplan generation
-- Workplan accuracy and ease-of-use improvements
-
----
-
-## Logic Engine Updates (Pre-release / Development Branch)
-
-### Features
-- Border smoothing pass to fix interleaved day assignments
-- Max hours cap enforcement — rebalance aids between overloaded days
-- Tidal/difficulty/barrier intelligence
-- Manual workplan builder
-- Waterway-aware routing, hotel scoring, modal cleanup
-
-### Fixes
-- Fixed workplan clustering hang — oscillation detection in Phases B and E

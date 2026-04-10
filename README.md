@@ -1,6 +1,6 @@
 # LightKeeper — USCG ATON Workplan Tool
 
-**Version 0.8.9.5** | Proprietary Software — All Rights Reserved
+**Version 0.8.9.5** | Initially released October 24, 2025 | Proprietary Software — All Rights Reserved
 
 LightKeeper is a desktop application for planning and managing work on US Coast Guard Aids to Navigation (ATON). It downloads official Light List data from USCG NAVCEN and provides tools to browse, search, select, and generate multi-day trip workplans with an advanced logic engine.
 
@@ -123,6 +123,8 @@ All shortcuts can be customized in Settings > Keybinds.
 - Tides & water levels: [NOAA CO-OPS](https://tidesandcurrents.noaa.gov), [USGS NWIS](https://waterservices.usgs.gov), [USBR RISE](https://data.usbr.gov)
 
 ## Recent Changes (v0.8.9.5)
+
+See [CHANGELOG.md](CHANGELOG.md) for full version history since October 2025.
 
 - Tides & Water Levels — right-click map to search NOAA, USGS, and USBR water stations; click markers to load data
 - Clickable station markers — load tide predictions, reservoir elevation, gage readings on click
