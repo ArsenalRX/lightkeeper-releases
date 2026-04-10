@@ -1,5 +1,7 @@
 # LightKeeper — USCG ATON Workplan Tool
 
+> **[View Full Changelog](CHANGELOG.md)** | **[Download Latest Release](https://github.com/ArsenalRX/lightkeeper-releases/releases/latest)**
+
 **Version 0.8.9.5** | Initially released October 24, 2025 | Proprietary Software — All Rights Reserved
 
 LightKeeper is a desktop application for planning and managing work on US Coast Guard Aids to Navigation (ATON). It downloads official Light List data from USCG NAVCEN and provides tools to browse, search, select, and generate multi-day trip workplans with an advanced logic engine.
