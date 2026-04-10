@@ -4,7 +4,7 @@ All notable changes to LightKeeper are documented here, organized by version.
 
 ---
 
-## v0.8.9.4 (April 2026)
+## v0.8.9.5 (April 10, 2026)
 
 ### New Features
 - **Tides & Water Levels** — right-click map to search nearby water stations from NOAA CO-OPS (tides, currents), USGS NWIS (river/stream gages), and USBR RISE (reservoirs like Lake Roosevelt/Grand Coulee)
@@ -20,7 +20,7 @@ All notable changes to LightKeeper are documented here, organized by version.
 - Route status bar shows "(on saved route)" or "(straight line)"
 
 ### Fixes
-- Fixed version display showing v0.8.9.3 instead of v0.8.9.4 in UI
+- Fixed version display mismatch across UI
 
 ### Removals
 - Removed Optimize button from Manual Builder (functionality merged into Distribute)
@@ -28,11 +28,24 @@ All notable changes to LightKeeper are documented here, organized by version.
 
 ---
 
-## v0.8.9.4 (April 4, 2026) — Initial Build
+## v0.8.9.4 (April 4, 2026)
 
 ### Fixes
 - Added third Overpass API fallback server for improved reliability
 - Fixed silent weather/tide/sunrise task failures in workplan generation
+
+---
+
+## v0.8.9.3 (April 2026)
+
+### New Features
+- **District picker** — jump to any USCG district from toolbar dropdown
+- **Extended aid data** — expanded ATON data fields for detailed aid info
+- **CDN tile loading** — direct CDN tiles when online for faster map rendering
+
+### Improvements
+- Improved map tile loading performance
+- Better district-level navigation
 
 ---
 

@@ -1,6 +1,6 @@
 # LightKeeper — USCG ATON Workplan Tool
 
-**Version 0.8.9.4** | Proprietary Software — All Rights Reserved
+**Version 0.8.9.5** | Proprietary Software — All Rights Reserved
 
 LightKeeper is a desktop application for planning and managing work on US Coast Guard Aids to Navigation (ATON). It downloads official Light List data from USCG NAVCEN and provides tools to browse, search, select, and generate multi-day trip workplans with an advanced logic engine.
 
@@ -122,17 +122,16 @@ All shortcuts can be customized in Settings > Keybinds.
 - Road distances: OSRM
 - Tides & water levels: [NOAA CO-OPS](https://tidesandcurrents.noaa.gov), [USGS NWIS](https://waterservices.usgs.gov), [USBR RISE](https://data.usbr.gov)
 
-## Recent Changes (v0.8.9.4)
+## Recent Changes (v0.8.9.5)
 
-- Tides & Water Levels — right-click map to search NOAA, USGS, and USBR stations with clickable markers
+- Tides & Water Levels — right-click map to search NOAA, USGS, and USBR water stations; click markers to load data
+- Clickable station markers — load tide predictions, reservoir elevation, gage readings on click
 - Route backbone snapping — workplan routes follow saved waterway paths instead of straight lines
-- Auto Route button on workplan Route Map
-- Smarter Distribute — auto-optimizes with border smoothing and hours balancing
-- Select All in View button restored
-- Responsive toolbar for smaller screens
-- Mapbox Directions API integration — faster routing with OSRM fallback
-- Added third Overpass API fallback server for improved reliability
-- Fixed silent weather/tide/sunrise task failures in workplan generation
+- Auto Route button — one-click to connect all aids for a day via saved route
+- Select All moved to Aids Browser — in each tab header, auto-opens workplan panel
+- Smarter Distribute — auto-optimizes with border smoothing and hours balancing (removed Optimize button)
+- Responsive toolbar — wraps to 2 rows on smaller screens with auto-adjusting layout
+- USBR RISE integration — Lake Roosevelt/Grand Coulee, Hungry Horse, Dworshak reservoir data
 
 ## License
 
