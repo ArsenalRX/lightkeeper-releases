@@ -106,7 +106,7 @@ All notable changes to LightKeeper are documented here.
 ## v0.8.7 (March 2026)
 
 ### Changes
-- Updated copyright holder to Evan Isakson
+- Updated copyright holder
 - Check both repos (source + releases) for updates
 - Updated copyright in About section and LICENSE file
 
