@@ -2,7 +2,7 @@
 
 > **[View Full Changelog](CHANGELOG.md)** | **[Download Latest Release](https://github.com/ArsenalRX/lightkeeper-releases/releases/latest)**
 
-**Version 0.9.0** | Initially released October 24, 2025 | Proprietary Software — All Rights Reserved
+**Version 1.0.0** | Initially released October 24, 2025 | Proprietary Software — All Rights Reserved
 
 LightKeeper is a desktop application for planning and managing work on US Coast Guard Aids to Navigation (ATON). It downloads official Light List data from USCG NAVCEN and provides tools to browse, search, select, and generate multi-day trip workplans with an advanced logic engine.
 
@@ -58,13 +58,15 @@ LightKeeper is a desktop application for planning and managing work on US Coast 
 - Draggable waypoints with click-to-delete
 - Distance and true/magnetic course labels per leg
 
-### Tides & Water Levels
-- Right-click map to search nearby water level stations
+### Water Monitoring
+- Right-click "Check Water Temp" — nearest USGS + NOAA station readings with distance and time
+- Lake/river level display — USGS gage height with historical context
+- Dam flow information — USACE CWMS outflow, inflow, pool elevation, tailwater
+- Flood alert integration — NWS flood warnings for current map area
+- Water station markers — distinct USGS, NOAA CO-OPS, and USACE dam markers with click-to-view
 - NOAA CO-OPS: tide predictions, coastal water levels, tidal currents
 - USGS NWIS: river stage, streamflow, inland lake levels
-- USBR RISE: Bureau of Reclamation reservoirs (Grand Coulee/Lake Roosevelt, Hungry Horse, Dworshak, and more)
-- Clickable station markers — load detailed data including current levels, 3-day tide predictions, reservoir elevation/inflow/storage
-- Color-coded badges by source (NOAA, USGS, USBR)
+- Color-coded badges by source (NOAA, USGS, USACE)
 - Direct links to official agency station pages
 
 ### Weather & Boat Ramps
@@ -72,10 +74,19 @@ LightKeeper is a desktop application for planning and managing work on US Coast 
 - Hotel finder with lodging type filters (Hotels, Motels, Resorts, Airport Hotels, Campgrounds)
 - Boat ramp/marina finder with surface quality, fee info, and smart POI-based naming
 
+### Safety & Validation
+- Hotel-in-water detection — verifies hotel coordinates are on land, discards results in lakes/rivers
+- Ramp-near-water verification — confirms ramps are within 500m of mapped waterway
+- Stale data warning banner — alerts when district data is older than 30 days
+
 ### Offline Support
+- Service worker with cache-first tiles, network-first APIs, stale-while-revalidate HTML
 - Map tile caching with CDN-direct loading when online, proxy cache when offline
 - Auto-precache on launch for seamless panning
 - Queue-based background tile downloader
+
+### Export
+- PDF workplan export — cover page, per-day schedules, aid details, summary page via jsPDF
 
 ### Tools & Settings
 - Zulu Time Calculator with 24hr military time, DST-aware date picker
@@ -122,22 +133,20 @@ All shortcuts can be customized in Settings > Keybinds.
 - Weather: National Weather Service API
 - Hotels & boat ramps: OpenStreetMap / Overpass API
 - Road distances: OSRM
-- Tides & water levels: [NOAA CO-OPS](https://tidesandcurrents.noaa.gov), [USGS NWIS](https://waterservices.usgs.gov), [USBR RISE](https://data.usbr.gov)
+- Water monitoring: [USGS NWIS](https://waterservices.usgs.gov), [NOAA CO-OPS](https://tidesandcurrents.noaa.gov), [USACE CWMS](https://cwms-data.usace.army.mil), [NWS AHPS](https://water.weather.gov)
 
-## Recent Changes (v0.9.0)
+## Recent Changes (v1.0.0)
 
 See [CHANGELOG.md](CHANGELOG.md) for full version history since October 2025.
 
-- **Water-aware routing** — routes automatically follow waterways around land using A* pathfinding on OSM water polygons
-- **Water station layer toggles** — show/hide Tides, Currents, USGS Gages, and Dams independently
-- **Unit preferences** — switch temperature, wind speed, elevation, and distance units in Settings
-- **USACE CWMS dam data** — real-time reservoir elevation, inflow, outflow, and storage from all 24 USACE offices
-- **USGS stream gages** — viewport-based lazy loading with discharge, gage height, and water temperature
-- **Two-row centered toolbar** — cleaner layout with section labels and consistent sizing
-- **Faster trip generation** — Phase 2 skip when sufficient hotels found, timeouts on corridor search and OSRM
-- Fixed NOAA tide stations invisible under current station markers
-- Fixed USGS gage temperature displaying in Celsius regardless of unit preference
-- Fixed trip generation hanging at "Refining hotel search"
+- **Water monitoring** — right-click Check Water Temp, Lake Level, Dam Flow Info, Flood Alerts with USGS/NOAA/USACE/NWS data
+- **Safety validation** — hotel-in-water detection, ramp-near-water verification, stale data warnings
+- **PDF workplan export** — formatted multi-page PDF with cover, daily schedules, and summary
+- **Service worker** — full offline support with cache-first tiles and network-first API strategies
+- **Spatial index** — grid-based warm pool for faster POI searches
+- **Trip templates & calendar** — save/reload trip configurations, multi-trip calendar view
+- Persistent status toasts for long-running water API calls
+- Exception logging replacing silent error swallowing
 
 ## License
 

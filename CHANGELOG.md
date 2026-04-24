@@ -6,6 +6,47 @@ All notable changes to LightKeeper are documented here.
 
 ---
 
+## v1.0.0 (April 24, 2026)
+
+### New Features
+- **Right-click water monitoring** — Check Water Temp, Lake/River Level, Dam Flow Info, and Flood Alerts from map context menu using USGS NWIS, NOAA CO-OPS, USACE CWMS, and NWS AHPS APIs
+- **Safety validation** — hotel-in-water detection discards POIs with coordinates in lakes/rivers; ramp-near-water verification confirms ramps are within 500m of mapped waterway
+- **Stale data warning banner** — persistent amber banner when any enabled district data is older than 30 days
+- **PDF workplan export** — formatted multi-page PDF via jsPDF with cover page, per-day schedules with aid details, and summary page
+- **Service worker** — cache-first for map tiles, network-first for API calls, stale-while-revalidate for HTML; enables full offline support after first load
+- **Trip templates & calendar** — save/reload complete trip configurations; multi-trip calendar view
+- **Spatial index** — grid-based warm pool replacing O(n) linear scan for faster POI searches
+
+### Improvements
+- **Persistent status toasts** — water check "Checking..." toasts stay visible until API responds instead of auto-dismissing after 3 seconds
+- **Expanded water temp search** — dedicated USGS param 00010 query with 50mi radius and 24hr lookback; NOAA water level stations for inland coverage
+- **Exception logging** — silent error swallowing replaced with proper logging across all endpoints
+- **Coordinate validation** — unified validation helpers replacing inline variations
+
+---
+
+## v0.9.0 (April 10, 2026)
+
+### New Features
+- **Water-aware routing** — routes automatically follow waterways around land using A* pathfinding on OpenStreetMap water polygons
+- **Water station layer toggles** — show/hide Tides, Currents, USGS Gages, and Dams independently
+- **Unit preferences** — switch temperature (F/C), wind speed (kt/mph/kph), elevation (ft/m), and distance (NM/mi/km) in Settings
+- **USACE CWMS dam data** — real-time reservoir elevation, inflow, outflow, and storage from all 24 USACE offices
+- **USGS stream gages** — viewport-based lazy loading with discharge, gage height, and water temperature
+
+### Improvements
+- **Two-row centered toolbar** — cleaner layout with section labels and consistent button sizing
+- **Faster trip generation** — Phase 2 hotel refinement skipped when sufficient hotels found; 20-second timeout on corridor search
+- **OSRM batch timeout** — 30-second timeout on driving distance calculations
+- **ENC charts** — restored WMS endpoint after NOAA tile services were discontinued
+
+### Bug Fixes
+- Fixed NOAA tide stations invisible under current station markers
+- Fixed USGS gage temperature displaying in Celsius regardless of unit preference
+- Fixed trip generation hanging at "Refining hotel search"
+
+---
+
 ## v0.8.9.5 (April 10, 2026)
 
 ### New Features
